@@ -1,5 +1,6 @@
 package com.demo_shopelectro_be.model.order;
 
+import com.demo_shopelectro_be.model.account.Account;
 import com.demo_shopelectro_be.model.product.Product;
 import lombok.Data;
 
@@ -11,9 +12,9 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int quantity;
-    private double price;
     @ManyToOne
     private Product product;
     @ManyToOne
     private Oder oder;
+
 }

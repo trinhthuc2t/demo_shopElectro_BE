@@ -1,63 +1,14 @@
 package com.demo_shopelectro_be.model.order;
-
 import com.demo_shopelectro_be.model.product.Product;
-import org.springframework.stereotype.Service;
+import lombok.Data;
+import java.time.LocalDateTime;
+import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
-@Service
+@Data
 public class Cart {
-    private Map<Product, Integer> products = new HashMap<>();
+    private LocalDateTime dateTime;
+    private double total;
+    private List<Product> products;
+    private int idAcc;
 
-    public Cart() {
-    }
-
-    public Cart(Map<Product, Integer> products) {
-        this.products = products;
-    }
-
-    public Map<Product, Integer> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Map<Product, Integer> products) {
-        this.products = products;
-    }
-
-    private boolean checkItemCart(Product product) {
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            if(entry.getKey().getId() == product.getId()){
-                return true;
-            }
-        }
-        return false;
-    }
-    public Map.Entry<Product , Integer> selectItemInCart (Product product){
-        for (Map.Entry<Product,Integer> entry: products.entrySet()){
-            if (entry.getKey().getId() == product.getId()){
-                return entry;
-            }
-        }
-        return null;
-    }
-
-    public Integer countProductQuantity(){
-        Integer productQuantity = 0;
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            productQuantity += entry.getValue();
-        }
-        return productQuantity;
-    }
-
-    public Integer countItemQuantity(){
-        return products.size();
-    }
-
-    public Float countTotalPayment(){
-        float payment = 0;
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            payment += entry.getKey().getPrice() * (float) entry.getValue();
-        }
-        return payment;
-    }
 }

@@ -20,8 +20,5 @@ public class AccountToken {
     private String phone;
     private String address;
     private Role roles;
-
-
-
 }
 

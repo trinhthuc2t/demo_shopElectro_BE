@@ -2,9 +2,11 @@ package com.demo_shopelectro_be.controller;
 
 import com.demo_shopelectro_be.model.product.Brand;
 import com.demo_shopelectro_be.model.product.Category;
+import com.demo_shopelectro_be.model.product.ImgPro;
 import com.demo_shopelectro_be.model.product.Product;
 import com.demo_shopelectro_be.service.IBrandService;
 import com.demo_shopelectro_be.service.ICategoryService;
+import com.demo_shopelectro_be.service.IImgProService;
 import com.demo_shopelectro_be.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,9 @@ public class ProductController {
     ICategoryService categoryService;
     @Autowired
     IBrandService brandService;
+    @Autowired
+    IImgProService imgProService;
+
 
     @GetMapping
     public List<Product> findAll() {
@@ -67,7 +72,10 @@ public class ProductController {
     public List<Product> search(@PathVariable String name) {
         return productService.findByNameContaining(name);
     }
-
+   @GetMapping("/by/{id}")
+    public Product search(@PathVariable int id) {
+        return productService.findById(id);
+    }
 
 
 }
