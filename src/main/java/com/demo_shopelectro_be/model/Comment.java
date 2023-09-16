@@ -14,7 +14,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(columnDefinition = "TEXT")
-    private String comment;
+    private String cmt;
     private LocalDateTime createdAt;
     @ManyToOne
     private Account account;
