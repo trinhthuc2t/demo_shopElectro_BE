@@ -40,7 +40,6 @@ public class CommentController {
         System.out.println(comment);
         comment.setAccount(account);
         comment.setProduct(product);
-
         return commentService.save(comment);
     }
 

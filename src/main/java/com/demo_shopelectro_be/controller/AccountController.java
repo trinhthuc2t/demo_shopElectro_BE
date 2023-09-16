@@ -18,7 +18,7 @@ public class AccountController {
     @Autowired
     HttpSession session;
 
-    @GetMapping
+    @GetMapping("/admin")
     public List<Account> getAll() {
         return accountService.findAll();
     }
@@ -30,7 +30,7 @@ public class AccountController {
     }
 
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public void delete(@PathVariable int id) {
         accountService.delete(id);
     }
@@ -41,9 +41,13 @@ public class AccountController {
 
     }
 
-    @GetMapping("/search")
-    public List<Account> search(@RequestParam String name) {
-        return (List<Account>) accountService.findByUsername(name);
+//    @GetMapping("/search")
+//    public List<Account> search(@RequestParam String name) {
+//        return (List<Account>) accountService.findByUsername(name);
+//    }
+    @GetMapping("/admin/search/{name}")
+    List<Account> findByUsernameContaining(@PathVariable String name){
+        return accountService.findByUsernameContaining(name);
     }
 
 

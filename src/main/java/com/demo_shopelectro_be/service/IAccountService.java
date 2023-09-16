@@ -9,5 +9,5 @@ public interface IAccountService extends IService<Account>, UserDetailsService {
     Account findByUsername(String username);
       Account login(String username, String password);
 
-
+    List<Account> findByUsernameContaining(String name);
 }

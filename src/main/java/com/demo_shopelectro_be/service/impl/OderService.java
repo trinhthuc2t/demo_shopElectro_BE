@@ -30,4 +30,9 @@ public class OderService implements IOderService {
     public Oder findById(int id) {
         return null;
     }
+
+    @Override
+    public List<Oder> findByAccountId(int id) {
+        return oderRepo.findByAccountId(id);
+    }
 }

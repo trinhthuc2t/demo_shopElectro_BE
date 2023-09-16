@@ -30,4 +30,9 @@ public class OrderDetailService implements IOrderDetailService {
     public OrderDetail findById(int id) {
         return null;
     }
+
+    @Override
+    public List<OrderDetail> findByOderId(int id) {
+        return orderDetailRepo.findByOderId(id);
+    }
 }

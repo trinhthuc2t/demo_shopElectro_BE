@@ -1,5 +1,6 @@
 package com.demo_shopelectro_be.controller;
 
+import com.demo_shopelectro_be.model.account.Account;
 import com.demo_shopelectro_be.model.order.Cart;
 
 import com.demo_shopelectro_be.model.order.Oder;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("user/oder")
+@RequestMapping("/oder")
 public class OderController {
     @Autowired
     OderService oderService;
@@ -25,7 +26,7 @@ public class OderController {
     IAccountService accountService;
     @Autowired
     IOrderDetailService orderDetailService;
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<?> save(@RequestBody Cart cart){
         Oder oder =new Oder();
         oder.setDateTime(cart.getDateTime());
@@ -43,5 +44,16 @@ public class OderController {
 return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+    @GetMapping("/admin")
+    public List<Oder> getAll(){
+        return oderService.findAll();
+    }
+
+    @GetMapping("/admin/{id}")
+    List<Oder> findByAccountId(@PathVariable int id){
+        return oderService.findByAccountId(id);
+    }
+
 
 }
