@@ -8,6 +8,7 @@ import com.demo_shopelectro_be.model.order.OrderDetail;
 import com.demo_shopelectro_be.model.product.Product;
 import com.demo_shopelectro_be.service.IAccountService;
 import com.demo_shopelectro_be.service.IOrderDetailService;
+import com.demo_shopelectro_be.service.IProductService;
 import com.demo_shopelectro_be.service.impl.OderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,8 @@ public class OderController {
     IAccountService accountService;
     @Autowired
     IOrderDetailService orderDetailService;
+    @Autowired
+    IProductService productService;
     @PostMapping("/user")
     public ResponseEntity<?> save(@RequestBody Cart cart){
         Oder oder =new Oder();
@@ -45,9 +48,21 @@ return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
+
     @GetMapping("/admin")
     public List<Oder> getAll(){
         return oderService.findAll();
+    }
+     @PostMapping("/{id}/{quantity}")
+    public ResponseEntity<?> editQuantity(@PathVariable int id,@PathVariable int quantity){
+         Product product = productService.findById(id);
+
+         if (product == null) {
+             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+         }
+        product.setQuantity(product.getQuantity() - quantity);
+         productService.save(product);
+         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/admin/{id}")
